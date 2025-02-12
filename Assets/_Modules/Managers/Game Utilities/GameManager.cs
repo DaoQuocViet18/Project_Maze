@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager> {
     private void Start() {
-        AudioManager.Instance.PlayMusic(GameAudioClip.BGM_PLAYING, -10f);
+        //AudioManager.Instance.PlayMusic(GameAudioClip.BGM_PLAYING, -10f);
     }
 
     private void Update() {
