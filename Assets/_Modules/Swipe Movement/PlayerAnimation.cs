@@ -38,11 +38,13 @@ public class PlayerAnimation : MonoBehaviour
 
         if (direction == Vector2.right)
         {
+            trailRotationZ = 0;
             rotationY = eulerAnglesY - 180;
             rotationZ = 90;
         }
         else if (direction == Vector2.left)
         {
+            trailRotationZ = 180;
             rotationY = eulerAnglesY - 180;
             rotationZ = -90;
         }
@@ -55,7 +57,7 @@ public class PlayerAnimation : MonoBehaviour
         else if (direction == Vector2.down)
         {
             rotationY = 180;
-            trailRotationZ = 90;
+            trailRotationZ = -90;
             eulerAnglesY = 180;
         }
 

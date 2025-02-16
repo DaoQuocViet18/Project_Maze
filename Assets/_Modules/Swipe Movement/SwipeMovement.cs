@@ -99,7 +99,7 @@ public class SwipeMovement : MonoBehaviour
         _playerAnimation.RotateOnMove(direction);
 
         // Di chuyển đến khi gặp vật cản
-        while (!CheckCollision(transform.position + (Vector3)direction * 0.58f))
+        while (!CheckCollision(transform.position + (Vector3)direction * 0.55f))
         {
             transform.position += (Vector3)direction * speed * Time.deltaTime;
             await UniTask.Yield(PlayerLoopTiming.Update);
@@ -111,15 +111,21 @@ public class SwipeMovement : MonoBehaviour
     private Vector3 GetAdjustedPosition()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, obstacleMask);
-        return hit.collider ? (Vector3)hit.point - (Vector3)(direction * 0.1f) : transform.position;
+        if (hit.collider)
+        {
+            float adjustedDistance = Mathf.Max(hit.distance - 0.1f, 0f); // Đảm bảo không lùi về quá xa
+            return transform.position + (Vector3)direction * adjustedDistance;
+        }
+        return transform.position;
     }
+
 
     private void OnDrawGizmos()
     {
         if (Application.isPlaying)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position + (Vector3)direction * 0.53f, 0.01f);
+            Gizmos.DrawWireSphere(transform.position + (Vector3)direction * 0.55f, 0.01f);
         }
     }
 
