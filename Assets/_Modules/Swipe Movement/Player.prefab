@@ -403,6 +403,7 @@ GameObject:
   - component: {fileID: 5997042854355602322}
   - component: {fileID: 6998090111431308358}
   - component: {fileID: 7410374103158849788}
+  - component: {fileID: 7753478735462781653}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -534,6 +535,18 @@ MonoBehaviour:
   TransPlayerImage: {fileID: 1081772091798870074}
   groundingParticle: {fileID: 6046937138817139341}
   ObjectTrailRenderer: {fileID: 6419092484670765859}
+--- !u!114 &7753478735462781653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6191156856910896574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b66eaa901b24b418caa89bc7a26e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6419092484670765859
 GameObject:
   m_ObjectHideFlags: 0

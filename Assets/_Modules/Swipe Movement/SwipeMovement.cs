@@ -31,7 +31,6 @@ public class SwipeMovement : MonoBehaviour
         // 🔹 Chỉ thực hiện di chuyển nếu nhân vật không đang di chuyển
         if (grounded && HasBufferedSwipe)
         {
-            Debug.Log("StartMoving_Update");
             bufferedSwipeTime = -1f;
             StartMoving().Forget();
         }
@@ -65,7 +64,6 @@ public class SwipeMovement : MonoBehaviour
 
                 if (grounded)
                 {
-                    Debug.Log("StartMoving_HandleSwipe");
                     StartMoving().Forget();
                 }
                 else
