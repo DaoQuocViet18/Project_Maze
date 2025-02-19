@@ -516,7 +516,7 @@ MonoBehaviour:
   speed: 50
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   _playerAnimation: {fileID: 7410374103158849788}
 --- !u!114 &7410374103158849788
 MonoBehaviour:

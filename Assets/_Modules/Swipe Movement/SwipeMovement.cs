@@ -4,17 +4,17 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerAnimation))]
-//[RequireComponent(typeof(SpriteRenderer))]
-//[RequireComponent(typeof(Animator))]
 public class SwipeMovement : MonoBehaviour
 {
-    public float speed = 5f; // Tốc độ di chuyển
-    public LayerMask obstacleMask; // Layer dùng để phát hiện tường
+    public float speed = 5f;
+    public LayerMask obstacleMask;
+
     [SerializeField] private PlayerAnimation _playerAnimation;
+    private Rigidbody2D _rb;
 
     private Vector2 swipeStart;
     private Vector2 direction;
-    private bool grounded = true;
+    [SerializeField] private bool grounded = true;
 
     private float swipeBufferTime = 2f;
     private float bufferedSwipeTime = -1f;
@@ -23,12 +23,21 @@ public class SwipeMovement : MonoBehaviour
     private void Reset() => SetUp();
     private void Awake() => SetUp();
 
-    void SetUp() => _playerAnimation = GetComponent<PlayerAnimation>();
+    private void SetUp()
+    {
+        _playerAnimation = GetComponent<PlayerAnimation>();
+        _rb = GetComponent<Rigidbody2D>();
 
-    void Update()
+        // 🔹 Cài đặt Rigidbody2D để kiểm tra va chạm tốt hơn
+        _rb.gravityScale = 0; // Không dùng trọng lực
+        _rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Không cho xoay
+        _rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // 🔥 Tránh xuyên vật cản
+    }
+
+    private void Update()
     {
         HandleSwipe();
-        // 🔹 Chỉ thực hiện di chuyển nếu nhân vật không đang di chuyển
+
         if (grounded && HasBufferedSwipe)
         {
             bufferedSwipeTime = -1f;
@@ -36,20 +45,18 @@ public class SwipeMovement : MonoBehaviour
         }
     }
 
-    void HandleSwipe()
+    private void HandleSwipe()
     {
-        
         if (Input.GetMouseButtonDown(0))
         {
             swipeStart = Input.mousePosition;
         }
-        
+
         if (Input.GetMouseButtonUp(0))
         {
             Vector2 swipeEnd = Input.mousePosition;
             Vector2 swipeDelta = swipeEnd - swipeStart;
 
-           
             if (swipeDelta.magnitude > 30)
             {
                 if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
@@ -76,60 +83,46 @@ public class SwipeMovement : MonoBehaviour
 
     private async UniTaskVoid StartMoving()
     {
-        if (!grounded) return; // Ngăn gọi liên tục
+        if (!grounded) return;
         grounded = false;
         _playerAnimation.AnimaRolling();
+        _playerAnimation.RotateOnMove(direction);
 
-        await MoveUntilObstacle(); // Di chuyển đến khi gặp vật cản
+        // 🔹 Chuyển động bằng Rigidbody2D
+        _rb.linearVelocity = direction * speed;
 
+        // 🔹 Kiểm tra va chạm liên tục
+        await UniTask.WaitUntil(() => CheckCollision(transform.position + (Vector3)direction * 0.5f));
+
+        // 🔹 Dừng khi va chạm
+        _rb.linearVelocity = Vector2.zero;
         grounded = true;
-        if (bufferedSwipeTime != -1f) return;
-        // Khi dừng lại, tính toán vị trí chính xác cách vật cản 0.1f và đặt lại vị trí
-        transform.position = GetAdjustedPosition();
-
         _playerAnimation.RotateOnCollision(direction);
         _playerAnimation.AnimaIdle();
     }
 
-    private async UniTask MoveUntilObstacle()
+    private void FixedUpdate()
     {
-        Vector2 direction = this.direction;
-        _playerAnimation.RotateOnMove(direction);
-
-        // Di chuyển đến khi gặp vật cản
-        while (!CheckCollision(transform.position + (Vector3)direction * 0.55f))
+        if (!grounded && CheckCollision(transform.position + (Vector3)direction * 0.5f))
         {
-            transform.position += (Vector3)direction * speed * Time.deltaTime;
-            await UniTask.Yield(PlayerLoopTiming.Update);
-        }
-        await UniTask.NextFrame();
-    }
-
-    // Trả về vị trí chính xác cách vật cản 0.1f
-    private Vector3 GetAdjustedPosition()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, obstacleMask);
-        if (hit.collider)
-        {
-            float adjustedDistance = Mathf.Max(hit.distance - 0.1f, 0f); // Đảm bảo không lùi về quá xa
-            return transform.position + (Vector3)direction * adjustedDistance;
-        }
-        return transform.position;
-    }
-
-
-    private void OnDrawGizmos()
-    {
-        if (Application.isPlaying)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position + (Vector3)direction * 0.55f, 0.01f);
+            _rb.linearVelocity = Vector2.zero; // 🔥 Dừng lại ngay khi chạm vật cản
+            grounded = true;
         }
     }
 
     private bool CheckCollision(Vector3 targetPosition)
     {
-        return Physics2D.OverlapCircle(targetPosition, 0.01f, obstacleMask) != null;
+        return Physics2D.OverlapCircle(targetPosition, 0.1f, obstacleMask) != null;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log($"Collision detected! Object Layer: {collision.gameObject.layer}, Obstacle Mask: {obstacleMask.value}");
+
+        if (((1 << collision.gameObject.layer) & obstacleMask) != 0)
+        {
+            grounded = true;
+            Debug.Log("Character has collided with an obstacle and is now grounded.");
+        }
+    }
 }

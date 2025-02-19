@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Obstacles
   - Player
-  - 
+  - Ground
   - 
   - 
   - 
@@ -40,6 +40,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Obstacles
+    uniqueID: 2222383661
+    locked: 0
+  - name: Ground
+    uniqueID: 640101125
+    locked: 0
+  - name: Player
+    uniqueID: 859086375
     locked: 0
   m_RenderingLayers:
   - Default

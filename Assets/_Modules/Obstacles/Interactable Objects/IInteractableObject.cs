@@ -2,5 +2,6 @@ using UnityEngine;
 
 public interface IInteractableObject
 {
-    public void Interact(GameObject targetObject);
+    public void InteractGoal(GameObject targetObject);
+    public void InteractGameOver(GameObject targetObject);
 }
