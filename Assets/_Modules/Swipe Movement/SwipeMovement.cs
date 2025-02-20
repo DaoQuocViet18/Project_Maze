@@ -96,6 +96,11 @@ public class SwipeMovement : MonoBehaviour
 
         // 🔹 Dừng khi va chạm
         _rb.linearVelocity = Vector2.zero;
+
+        // 🔹 Tiến thêm 0.1f về hướng va chạm
+        Vector3 finalPosition = transform.position + (Vector3)direction * 0.1f;
+        transform.position = finalPosition;
+
         grounded = true;
         _playerAnimation.RotateOnCollision(direction);
         _playerAnimation.AnimaIdle();
@@ -113,16 +118,5 @@ public class SwipeMovement : MonoBehaviour
     private bool CheckCollision(Vector3 targetPosition)
     {
         return Physics2D.OverlapCircle(targetPosition, 0.1f, obstacleMask) != null;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log($"Collision detected! Object Layer: {collision.gameObject.layer}, Obstacle Mask: {obstacleMask.value}");
-
-        if (((1 << collision.gameObject.layer) & obstacleMask) != 0)
-        {
-            grounded = true;
-            Debug.Log("Character has collided with an obstacle and is now grounded.");
-        }
     }
 }

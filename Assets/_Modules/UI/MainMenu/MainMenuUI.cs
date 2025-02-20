@@ -10,8 +10,8 @@ public class MainMenuUI : MonoBehaviour
     private void Start()
     {
         playButton.onClick.AddListener(() => {
-            //Loader.Instance.LoadWithFade(SceneName.SelectLevelScene);
-            Loader.Instance.LoadWithFade(SceneName.GameScene);
+            Loader.Instance.LoadWithFade(SceneName.SelectLevelScene);
+            //Loader.Instance.LoadWithFade(SceneName.GameScene);
         });
         exitButton.onClick.AddListener(() => {
             Application.Quit();
