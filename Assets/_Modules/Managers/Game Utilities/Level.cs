@@ -9,6 +9,13 @@ public class Level : MonoBehaviour
 
     public void onWinGame(Action callback)
     {
+        callback?.Invoke();
+        //character.animGoUp(callback);
+    }
+
+    public void onLostGame(Action callback)
+    {
+        callback?.Invoke();
         //character.animGoUp(callback);
     }
 }

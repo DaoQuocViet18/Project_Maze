@@ -94,12 +94,11 @@ public class SwipeMovement : MonoBehaviour
         // 🔹 Kiểm tra va chạm liên tục
         await UniTask.WaitUntil(() => CheckCollision(transform.position + (Vector3)direction * 0.5f));
 
+
         // 🔹 Dừng khi va chạm
         _rb.linearVelocity = Vector2.zero;
 
-        // 🔹 Tiến thêm 0.1f về hướng va chạm
-        Vector3 finalPosition = transform.position + (Vector3)direction * 0.1f;
-        transform.position = finalPosition;
+        transform.position = GetAdjustedPosition();
 
         grounded = true;
         _playerAnimation.RotateOnCollision(direction);
@@ -118,5 +117,16 @@ public class SwipeMovement : MonoBehaviour
     private bool CheckCollision(Vector3 targetPosition)
     {
         return Physics2D.OverlapCircle(targetPosition, 0.1f, obstacleMask) != null;
+    }
+
+    private Vector3 GetAdjustedPosition()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, obstacleMask);
+        if (hit.collider != null)
+        {
+            float adjustedDistance = Mathf.Max(hit.distance - 0.05f, 0f); // Đảm bảo không lùi vào trong vật cản
+            return transform.position + (Vector3)direction * adjustedDistance;
+        }
+        return transform.position;
     }
 }

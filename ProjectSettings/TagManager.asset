@@ -41,11 +41,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Obstacles
-    uniqueID: 2222383661
-    locked: 0
-  - name: Ground
+  - name: Wall
     uniqueID: 640101125
+    locked: 0
+  - name: Floor
+    uniqueID: 2222383661
     locked: 0
   - name: Player
     uniqueID: 859086375
