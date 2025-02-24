@@ -13,12 +13,6 @@ public class GameManager : Singleton<GameManager>
     private GameObject currentLevelInstance; // Instance của Level hiện tại
     private Level currentLevelComponent; // Component Level của Level hiện tại
 
-    private static int maxCurrentLevel = 0;
-    private static int currentLevel = 0;
-
-    public static int MaxCurrentLevel { get => maxCurrentLevel; }
-    public static int CurrentLevel { get => currentLevel; set => currentLevel = value; }
-
     private void OnEnable()
     {
         EventDispatcher.Add<EventDefine.OnIncreasePoint>(onIncreasePoint);
@@ -31,7 +25,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        onLoadLevel(currentLevel);
+        
+        onLoadLevel(Player.Instance.CurrentLevel);
         TimeRun();
     }
 
@@ -67,10 +62,10 @@ public class GameManager : Singleton<GameManager>
         }
 
         Debug.Log("Loading level: " + levelIndex);
-        currentLevel = levelIndex;
+        Player.Instance.CurrentLevel = levelIndex;
 
         // Tạo level mới từ Prefab
-        currentLevelInstance = Instantiate(levelPrefabs[currentLevel], transform.position, Quaternion.identity);
+        currentLevelInstance = Instantiate(levelPrefabs[Player.Instance.CurrentLevel], transform.position, Quaternion.identity);
         currentLevelInstance.transform.parent = GameObject.Find("Environment").transform;
         // Lấy component Level từ GameObject
         currentLevelComponent = currentLevelInstance.GetComponent<Level>();
@@ -84,20 +79,17 @@ public class GameManager : Singleton<GameManager>
         // Cập nhật điểm số từ Level
         MaxPoint = currentLevelComponent.MaxPoint;
         currentPoint = 0;
-
-        // Gửi sự kiện cập nhật UI
-        EventDispatcher.Dispatch(new EventDefine.OnUpdateProgressBar());
     }
 
     public void activeWinGame()
     {
-        if (currentLevel == maxCurrentLevel && maxCurrentLevel < levelPrefabs.Length - 1)
+        if (Player.Instance.CurrentLevel == Player.Instance.MaxCurrentLevel && Player.Instance.MaxCurrentLevel < levelPrefabs.Length - 1)
         {
-            maxCurrentLevel++;
+            Player.Instance.MaxCurrentLevel++;
         }
 
-        Debug.Log("MaxCurrentLevel: " + maxCurrentLevel);
-        Debug.Log("currentLevel: " + currentLevel);
+        Debug.Log("MaxCurrentLevel: " + Player.Instance.MaxCurrentLevel);
+        Debug.Log("currentLevel: " + Player.Instance.CurrentLevel);
         Debug.Log("levels.Length: " + levelPrefabs.Length);
 
         // Kiểm tra và gọi onWinGame từ Level component thay vì GameObject
@@ -106,16 +98,16 @@ public class GameManager : Singleton<GameManager>
             currentLevelComponent.onWinGame(() =>
             {
 
-                //if (currentLevel + 1 == levelPrefabs.Length)
-                //{
-                //    //Loader.Instance.LoadWithFade(SceneName.EndingScene);
-                //}
-                //else
-                //{
-                //    EventDispatcher.Dispatch(new EventDefine.OnWinGame());
-                //}
-                EventDispatcher.Dispatch(new EventDefine.OnWinGame());
-                GameManager.Instance.TimeStop();
+                if (Player.Instance.CurrentLevel + 1 == levelPrefabs.Length)
+                {
+                    //loader.instance.loadwithfade(scenename.endingscene);
+                }
+                else
+                {
+                    EventDispatcher.Dispatch(new EventDefine.OnWinGame());
+                    Player.Instance.SavePlayer();
+                    TimeStop();
+                }
             });
         }
         else
@@ -132,7 +124,7 @@ public class GameManager : Singleton<GameManager>
             currentLevelComponent.onLostGame(() =>
             {
                 EventDispatcher.Dispatch(new EventDefine.OnLoseGame());
-                GameManager.Instance.TimeStop();
+                TimeStop();
             });
         }
         else
@@ -141,11 +133,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public int getCurrentLevel()
-    {
-        return currentLevel;
-    }
-
+   
     public float getCurrenProgress()
     {
         return (float)currentPoint / MaxPoint;
@@ -160,11 +148,5 @@ public class GameManager : Singleton<GameManager>
         }
 
         EventDispatcher.Dispatch(new EventDefine.OnUpdateProgressBar());
-    }
-
-
-    void setDefualtPoint()
-    {
-        currentPoint = 0;
     }
 }

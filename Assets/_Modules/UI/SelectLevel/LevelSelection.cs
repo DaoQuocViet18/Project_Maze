@@ -16,9 +16,9 @@ public class LevelSelection : MonoBehaviour
         {
             int levelIndex = i; // Lưu trữ chỉ số level
             levelButtons[i].onClick.AddListener(() => {
+                Player.Instance.CurrentLevel = levelIndex;
                 Loader.Instance.LoadWithFade(SceneName.GameScene);
-                GameManager.CurrentLevel = levelIndex;
-                Debug.Log("GameManager.CurrentLevel: " + GameManager.CurrentLevel);
+                Debug.Log("GameManager.CurrentLevel: " + Player.Instance.CurrentLevel);
                 //Loader.Instance.LoadWithFade((SceneName)System.Enum.Parse(typeof(SceneName), "Level" + levelIndex));
             });
         }
@@ -27,7 +27,7 @@ public class LevelSelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int levelAt = GameManager.MaxCurrentLevel;
+        int levelAt = Player.Instance.MaxCurrentLevel;
 
         for (int i = 0; i < levelButtons.Length; i++)
         {
