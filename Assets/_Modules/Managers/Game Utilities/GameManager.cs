@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private int MaxPoint = 4;
     [SerializeField] private int currentPoint = 0;
 
-    [SerializeField] GameObject[] levelPrefabs; // Prefab của Level
+    public GameObject[] levelPrefabs; // Prefab của Level
     private GameObject currentLevelInstance; // Instance của Level hiện tại
     private Level currentLevelComponent; // Component Level của Level hiện tại
 
@@ -97,17 +97,9 @@ public class GameManager : Singleton<GameManager>
         {
             currentLevelComponent.onWinGame(() =>
             {
-
-                if (Player.Instance.CurrentLevel + 1 == levelPrefabs.Length)
-                {
-                    //loader.instance.loadwithfade(scenename.endingscene);
-                }
-                else
-                {
-                    EventDispatcher.Dispatch(new EventDefine.OnWinGame());
-                    Player.Instance.SavePlayer();
-                    TimeStop();
-                }
+                EventDispatcher.Dispatch(new EventDefine.OnWinGame());
+                Player.Instance.SavePlayer();
+                TimeStop();
             });
         }
         else

@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,19 @@ public class LevelSelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        string path = Application.persistentDataPath + "/player.dat";
+        Debug.Log("Application.persistentDataPath: " + Application.persistentDataPath);
+
+        if (File.Exists(path))
+        {
+            Debug.Log("Save file found! Loading player data...");
+            Player.Instance.LoadPlayer();
+        }
+        else
+        {
+            Debug.LogWarning("No save file found! Starting new game.");
+        }
+
         int levelAt = Player.Instance.MaxCurrentLevel;
 
         for (int i = 0; i < levelButtons.Length; i++)

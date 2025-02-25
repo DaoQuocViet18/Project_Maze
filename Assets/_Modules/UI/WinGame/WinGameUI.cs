@@ -13,9 +13,12 @@ public class WinGameUI : MonoBehaviour
 
     private void Awake()
     {
-        nextButton.onClick.AddListener(OnNextLevelBtnClick);
-        replayButton.onClick.AddListener(OnReplayBtnClick);
-        homeButton.onClick.AddListener(OnHomeBtnClick);
+        nextButton.onClick.AddListener(() => {
+            Player.Instance.CurrentLevel++;
+            Loader.Instance.LoadWithFade(SceneName.GameScene);
+        });
+        replayButton.onClick.AddListener(() => Loader.Instance.LoadWithFade(SceneName.GameScene));
+        homeButton.onClick.AddListener(() => Loader.Instance.LoadWithFade(SceneName.MainMenuScene));
 
         WinPanel.SetActive(false);
     }
@@ -30,50 +33,18 @@ public class WinGameUI : MonoBehaviour
         EventDispatcher.Remove<EventDefine.OnWinGame>(OnWinGame);
     }
 
-    private void OnNextLevelBtnClick()
-    {
-        Player.Instance.CurrentLevel++;
-        Loader.Instance.LoadWithFade(SceneName.GameScene);
-    }
-
-    private void OnReplayBtnClick()
-    {
-        // Replay current level
-        Loader.Instance.LoadWithFade(SceneName.GameScene);
-    }
-
-    private void OnHomeBtnClick()
-    {
-        // Go to home scene
-        Loader.Instance.LoadWithFade(SceneName.MainMenuScene);
-    }
-
-    public void ShowWinPanel()
-    {
-        WinPanel.SetActive(true);
-    }
-
-    public void HideWinPanel()
-    {
-        WinPanel.SetActive(false);
-    }
-
     public void ShowConfirmDialogue(ConfirmDialogue confirmDialogue)
     {
         confirmDialog = confirmDialogue;
-    }
-
-    public int nextSceneLoad;
-
-    void Start()
-    {
-        nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;
     }
 
     private void OnWinGame(IEventParam param)
     {
         Debug.Log("WIN");
         AudioManager.Instance.PlaySound(GameAudioClip.REWARD_SOUND);
-        ShowWinPanel();
+
+        if (Player.Instance.CurrentLevel + 1 == GameManager.Instance.levelPrefabs.Length)
+            nextButton.interactable = false;
+        WinPanel.SetActive(true);
     }
 }
