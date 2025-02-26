@@ -1,10 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using System;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class FadeTransition : MonoBehaviour {
-    private Animator animator;
+    public Animator animator;
 
     private void Awake() {
         animator = GetComponent<Animator>();

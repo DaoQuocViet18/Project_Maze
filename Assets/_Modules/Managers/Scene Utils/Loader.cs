@@ -1,4 +1,5 @@
-using System.Collections;
+﻿using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,11 +30,13 @@ public class Loader : Singleton<Loader>
     public async void LoadWithFade(SceneName targetScene)
     {
         Transform fadeTransitionPrefab = Resources.Load<Transform>("pfFadeSceneTransition");
-        FadeTransition fadeTransition = Instantiate(fadeTransitionPrefab).GetComponent<FadeTransition>();
+        GameObject pfFadeSceneTransition = Instantiate(fadeTransitionPrefab).gameObject;
+        FadeTransition fadeTransition = pfFadeSceneTransition.GetComponent<FadeTransition>();
+        LoadingbarUI loadingbarUI = pfFadeSceneTransition.GetComponentInChildren<LoadingbarUI>();
         DontDestroyOnLoad(fadeTransition.gameObject);
 
         await fadeTransition.FadeOut();
-        Load(targetScene);
+        await loadingbarUI.LoadSceneAsync(targetScene);
         await fadeTransition.FadeIn();
         Destroy(fadeTransition.gameObject);
     }
