@@ -8,7 +8,7 @@ public class PlayerData
 
     public PlayerData(Player player)
     {
-        maxCurrentLevel = player.MaxCurrentLevel;
+        maxCurrentLevel = player.maxCurrentLevel;
     }
 }
 

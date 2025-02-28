@@ -14,7 +14,7 @@ public class WinGameUI : MonoBehaviour
     private void Awake()
     {
         nextButton.onClick.AddListener(() => {
-            Player.Instance.CurrentLevel++;
+            Player.Instance.currentLevel++;
             Loader.Instance.LoadWithFade(SceneName.GameScene);
         });
         replayButton.onClick.AddListener(() => Loader.Instance.LoadWithFade(SceneName.GameScene));
@@ -43,7 +43,7 @@ public class WinGameUI : MonoBehaviour
         Debug.Log("WIN");
         AudioManager.Instance.PlaySound(GameAudioClip.REWARD_SOUND);
 
-        if (Player.Instance.CurrentLevel + 1 == GameManager.Instance.levelPrefabs.Length)
+        if (Player.Instance.currentLevel + 1 == GameManager.Instance.levelPrefabs.Length)
             nextButton.interactable = false;
         WinPanel.SetActive(true);
     }

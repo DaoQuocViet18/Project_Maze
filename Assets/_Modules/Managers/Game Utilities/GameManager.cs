@@ -26,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         
-        onLoadLevel(Player.Instance.CurrentLevel);
+        onLoadLevel(Player.Instance.currentLevel);
         TimeRun();
     }
 
@@ -62,10 +62,10 @@ public class GameManager : Singleton<GameManager>
         }
 
         Debug.Log("Loading level: " + levelIndex);
-        Player.Instance.CurrentLevel = levelIndex;
+        Player.Instance.currentLevel = levelIndex;
 
         // Tạo level mới từ Prefab
-        currentLevelInstance = Instantiate(levelPrefabs[Player.Instance.CurrentLevel], transform.position, Quaternion.identity);
+        currentLevelInstance = Instantiate(levelPrefabs[Player.Instance.currentLevel], transform.position, Quaternion.identity);
         currentLevelInstance.transform.parent = GameObject.Find("Environment").transform;
         // Lấy component Level từ GameObject
         currentLevelComponent = currentLevelInstance.GetComponent<Level>();
@@ -83,13 +83,13 @@ public class GameManager : Singleton<GameManager>
 
     public void activeWinGame()
     {
-        if (Player.Instance.CurrentLevel == Player.Instance.MaxCurrentLevel && Player.Instance.MaxCurrentLevel < levelPrefabs.Length - 1)
+        if (Player.Instance.currentLevel == Player.Instance.maxCurrentLevel && Player.Instance.maxCurrentLevel < levelPrefabs.Length - 1)
         {
-            Player.Instance.MaxCurrentLevel++;
+            Player.Instance.maxCurrentLevel++;
         }
 
-        Debug.Log("MaxCurrentLevel: " + Player.Instance.MaxCurrentLevel);
-        Debug.Log("currentLevel: " + Player.Instance.CurrentLevel);
+        Debug.Log("MaxCurrentLevel: " + Player.Instance.maxCurrentLevel);
+        Debug.Log("currentLevel: " + Player.Instance.currentLevel);
         Debug.Log("levels.Length: " + levelPrefabs.Length);
 
         // Kiểm tra và gọi onWinGame từ Level component thay vì GameObject

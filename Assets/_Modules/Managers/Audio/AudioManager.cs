@@ -15,7 +15,7 @@ public enum GameAudioClip
 
 public class AudioManager : Singleton<AudioManager> 
 {
-    private AudioSource musicSource;
+    public AudioSource SFXSource;
     private bool isMusicEnabled = true;
     
     public bool IsMusicEnabled
@@ -25,16 +25,15 @@ public class AudioManager : Singleton<AudioManager>
         {
             isMusicEnabled = value;
             if (!value)
-                musicSource.Stop();
-            else if (musicSource.clip != null)
-                musicSource.Play();
+                SFXSource.Stop();
+            else if (SFXSource.clip != null)
+                SFXSource.Play();
         }
     }
 
     private void Awake()
     {
-        musicSource = gameObject.AddComponent<AudioSource>();
-        musicSource.playOnAwake = false;
+        SFXSource.playOnAwake = false;
     }
 
     private AudioClip LoadAudioClip(GameAudioClip clip)
@@ -61,10 +60,10 @@ public class AudioManager : Singleton<AudioManager>
         var audioClip = LoadAudioClip(clip);
         if (audioClip == null) return;
 
-        ConfigureAudioSource(musicSource, audioClip, volumeDb);
+        ConfigureAudioSource(SFXSource, audioClip, volumeDb);
         
         if (IsMusicEnabled)
-            musicSource.Play();
+            SFXSource.Play();
     }
 
     public async void PlaySound(GameAudioClip clip, float volumeDb = 0f, float pitch = 1f)
@@ -72,12 +71,11 @@ public class AudioManager : Singleton<AudioManager>
         var audioClip = LoadAudioClip(clip);
         if (audioClip == null) return;
 
-        var audioSource = gameObject.AddComponent<AudioSource>();
+        var audioSource = SFXSource;
         ConfigureAudioSource(audioSource, audioClip, volumeDb, pitch);
         audioSource.Play();
 
         await Task.Delay((int)(audioClip.length * 1000));
-        Destroy(audioSource);
     }
 
     public void PlaySoundWithRandomPitch(GameAudioClip clip, float volumeDb = 0f, float minPitch = 0.8f, float maxPitch = 1.2f)
@@ -88,30 +86,30 @@ public class AudioManager : Singleton<AudioManager>
 
     public async void StopMusic(bool fade = true, float duration = 2f)
     {
-        if (!musicSource.isPlaying) return;
+        if (!SFXSource.isPlaying) return;
 
         if (!fade)
         {
-            musicSource.Stop();
+            SFXSource.Stop();
             return;
         }
 
-        float startVolume = musicSource.volume;
+        float startVolume = SFXSource.volume;
         float currentTime = 0;
 
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
-            musicSource.volume = Mathf.Lerp(startVolume, 0f, currentTime / duration);
+            SFXSource.volume = Mathf.Lerp(startVolume, 0f, currentTime / duration);
             await Task.Yield();
         }
 
-        musicSource.Stop();
+        SFXSource.Stop();
     }
 
     public void SetMusicPitch(float pitch)
     {
-        musicSource.pitch = pitch;
+        SFXSource.pitch = pitch;
     }
 
     public async void PlayMusicWithFadeOut(GameAudioClip music, float fadeTime)

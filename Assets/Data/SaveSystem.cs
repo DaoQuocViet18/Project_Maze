@@ -37,4 +37,38 @@ public static class SaveSystem
             return null;
         }
     }
+
+    public static void SaveSettingGame(SettingGame setting)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/settingGame.dat";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+
+        SettingGameData data = new SettingGameData(setting);
+
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static SettingGameData LoadSettingGame()
+    {
+        string path = Application.persistentDataPath + "/settingGame.dat";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+
+            SettingGameData data = formatter.Deserialize(stream) as SettingGameData;
+            stream.Close();
+            return data;
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+            return null;
+        }
+    }
 }
