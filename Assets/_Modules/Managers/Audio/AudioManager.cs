@@ -15,7 +15,7 @@ public enum GameAudioClip
 
 public class AudioManager : Singleton<AudioManager> 
 {
-    public AudioSource SFXSource;
+    public AudioSource SoundSource;
     private bool isMusicEnabled = true;
     
     public bool IsMusicEnabled
@@ -25,15 +25,15 @@ public class AudioManager : Singleton<AudioManager>
         {
             isMusicEnabled = value;
             if (!value)
-                SFXSource.Stop();
-            else if (SFXSource.clip != null)
-                SFXSource.Play();
+                SoundSource.Stop();
+            else if (SoundSource.clip != null)
+                SoundSource.Play();
         }
     }
 
     private void Awake()
     {
-        SFXSource.playOnAwake = false;
+        SoundSource.playOnAwake = false;
     }
 
     private AudioClip LoadAudioClip(GameAudioClip clip)
@@ -60,10 +60,10 @@ public class AudioManager : Singleton<AudioManager>
         var audioClip = LoadAudioClip(clip);
         if (audioClip == null) return;
 
-        ConfigureAudioSource(SFXSource, audioClip, volumeDb);
+        ConfigureAudioSource(SoundSource, audioClip, volumeDb);
         
         if (IsMusicEnabled)
-            SFXSource.Play();
+            SoundSource.Play();
     }
 
     public async void PlaySound(GameAudioClip clip, float volumeDb = 0f, float pitch = 1f)
@@ -71,7 +71,7 @@ public class AudioManager : Singleton<AudioManager>
         var audioClip = LoadAudioClip(clip);
         if (audioClip == null) return;
 
-        var audioSource = SFXSource;
+        var audioSource = SoundSource;
         ConfigureAudioSource(audioSource, audioClip, volumeDb, pitch);
         audioSource.Play();
 
@@ -86,30 +86,30 @@ public class AudioManager : Singleton<AudioManager>
 
     public async void StopMusic(bool fade = true, float duration = 2f)
     {
-        if (!SFXSource.isPlaying) return;
+        if (!SoundSource.isPlaying) return;
 
         if (!fade)
         {
-            SFXSource.Stop();
+            SoundSource.Stop();
             return;
         }
 
-        float startVolume = SFXSource.volume;
+        float startVolume = SoundSource.volume;
         float currentTime = 0;
 
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
-            SFXSource.volume = Mathf.Lerp(startVolume, 0f, currentTime / duration);
+            SoundSource.volume = Mathf.Lerp(startVolume, 0f, currentTime / duration);
             await Task.Yield();
         }
 
-        SFXSource.Stop();
+        SoundSource.Stop();
     }
 
     public void SetMusicPitch(float pitch)
     {
-        SFXSource.pitch = pitch;
+        SoundSource.pitch = pitch;
     }
 
     public async void PlayMusicWithFadeOut(GameAudioClip music, float fadeTime)

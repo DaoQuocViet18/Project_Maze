@@ -322,7 +322,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SFX
+  m_text: Sound
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -583,10 +583,8 @@ MonoBehaviour:
   settingBtn: {fileID: 4765497062762961010}
   backBtn: {fileID: 286881837211000509}
   musicToggleBtn: {fileID: 5199416212742116962}
-  sfxToggleBtn: {fileID: 1010543851886087958}
+  soundToggleBtn: {fileID: 1010543851886087958}
   audioMixer: {fileID: 24100000, guid: 3fe561206454fb04186808899ee8a61a, type: 2}
-  isSoundOn: 1
-  isMusicOn: 1
 --- !u!1 &2972376871302806353
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,7 +734,7 @@ GameObject:
   - component: {fileID: 3430040588387031376}
   - component: {fileID: 1010543851886087958}
   m_Layer: 5
-  m_Name: SFXBtn
+  m_Name: SoundBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

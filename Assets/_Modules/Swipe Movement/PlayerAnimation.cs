@@ -6,7 +6,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Transform TransPlayerImage;
-    [SerializeField] private ParticleSystem groundingParticle;
+    [SerializeField] private ParticleSystem bouncingParticles;
     [SerializeField] private GameObject ObjectTrailRenderer;
 
     private float eulerAnglesY = -180;
@@ -18,14 +18,14 @@ public class PlayerAnimation : MonoBehaviour
 
     public void AnimaRolling()
     {
-        groundingParticle.Stop(true);   // Dừng hệ thống hạt
-        groundingParticle.Clear();      // Xóa toàn bộ hạt đang tồn tại ngay lập tức
+        bouncingParticles.Stop(true);   // Dừng hệ thống hạt
+        bouncingParticles.Clear();      // Xóa toàn bộ hạt đang tồn tại ngay lập tức
         animator.CrossFade("Player_Image_Rolling", 0.1f);
     }
 
     public void AnimaIdle()
     {
-        groundingParticle.Play();  
+        bouncingParticles.Play();  
         animator.CrossFade("Player_Image_Idle", 0.1f);
     }
 
@@ -80,8 +80,6 @@ public class PlayerAnimation : MonoBehaviour
         {
             rotationZ = -90;
             TransPlayerImage.eulerAngles = new Vector3(0, eulerAnglesY, (eulerAnglesY == 0) ? rotationZ : -rotationZ);
-
         }
-
     }
 }

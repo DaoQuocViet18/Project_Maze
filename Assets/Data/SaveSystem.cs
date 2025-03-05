@@ -38,30 +38,30 @@ public static class SaveSystem
         }
     }
 
-    public static void SaveSettingGame(SettingGame setting)
+    public static void SaveSetting(Setting setting)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/settingGame.dat";
+        string path = Application.persistentDataPath + "/setting.dat";
         FileStream stream = new FileStream(path, FileMode.Create);
 
 
-        SettingGameData data = new SettingGameData(setting);
+        SettingData data = new SettingData(setting);
 
 
         formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public static SettingGameData LoadSettingGame()
+    public static SettingData LoadSetting()
     {
-        string path = Application.persistentDataPath + "/settingGame.dat";
+        string path = Application.persistentDataPath + "/setting.dat";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
 
-            SettingGameData data = formatter.Deserialize(stream) as SettingGameData;
+            SettingData data = formatter.Deserialize(stream) as SettingData;
             stream.Close();
             return data;
         }

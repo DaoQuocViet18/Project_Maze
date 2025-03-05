@@ -9,22 +9,22 @@ public class SettingMenuUI : MonoBehaviour
     [SerializeField] private Button settingBtn;
     [SerializeField] private Button backBtn;
     [SerializeField] private Button musicToggleBtn;
-    [SerializeField] private Button sfxToggleBtn;
+    [SerializeField] private Button soundToggleBtn;
     public AudioMixer audioMixer;
 
     private void Start()
     {
         settingBtn.onClick.AddListener(OnSetting);
         backBtn.onClick.AddListener(OnBack);
-        sfxToggleBtn.onClick.AddListener(ToggleSound);
+        soundToggleBtn.onClick.AddListener(ToggleSound);
         musicToggleBtn.onClick.AddListener(ToggleMusic);
         SettingMenuPanel.SetActive(false);
         
-        SettingGame.Instance.LoadSettingGame();
-        audioMixer.SetFloat("sound", SettingGame.Instance.isSFXOn ? 0 : -80);
-        audioMixer.SetFloat("music", SettingGame.Instance.isMusicOn ? 0 : -80);
-        UpdateButtonText(sfxToggleBtn, SettingGame.Instance.isSFXOn);
-        UpdateButtonText(musicToggleBtn, SettingGame.Instance.isMusicOn);
+        Setting.Instance.LoadSetting();
+        audioMixer.SetFloat("sound", Setting.Instance.isSoundOn ? 0 : -80);
+        audioMixer.SetFloat("music", Setting.Instance.isMusicOn ? 0 : -80);
+        UpdateButtonText(soundToggleBtn, Setting.Instance.isSoundOn);
+        UpdateButtonText(musicToggleBtn, Setting.Instance.isMusicOn);
     }
 
     private void OnSetting()
@@ -34,22 +34,22 @@ public class SettingMenuUI : MonoBehaviour
 
     private void OnBack()
     {
-        SettingGame.Instance.SaveSettingGame();
+        Setting.Instance.SaveSetting();
         SettingMenuPanel.SetActive(false);
     }
 
     public void ToggleSound()
     {
-        SettingGame.Instance.isSFXOn = !SettingGame.Instance.isSFXOn;
-        audioMixer.SetFloat("sound", SettingGame.Instance.isSFXOn ? 0 : -80);
-        UpdateButtonText(sfxToggleBtn, SettingGame.Instance.isSFXOn);
+        Setting.Instance.isSoundOn = !Setting.Instance.isSoundOn;
+        audioMixer.SetFloat("sound", Setting.Instance.isSoundOn ? 0 : -80);
+        UpdateButtonText(soundToggleBtn, Setting.Instance.isSoundOn);
     }
 
     public void ToggleMusic()
     {
-        SettingGame.Instance.isMusicOn = !SettingGame.Instance.isMusicOn;
-        audioMixer.SetFloat("music", SettingGame.Instance.isMusicOn ? 0 : -80);
-        UpdateButtonText(musicToggleBtn, SettingGame.Instance.isMusicOn);
+        Setting.Instance.isMusicOn = !Setting.Instance.isMusicOn;
+        audioMixer.SetFloat("music", Setting.Instance.isMusicOn ? 0 : -80);
+        UpdateButtonText(musicToggleBtn, Setting.Instance.isMusicOn);
     }
 
     private void UpdateButtonText(Button button, bool isOn)

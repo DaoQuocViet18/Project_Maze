@@ -1,5 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -85,8 +87,17 @@ public class SwipeMovement : MonoBehaviour
     {
         if (!grounded) return;
         grounded = false;
-        _playerAnimation.AnimaRolling();
         _playerAnimation.RotateOnMove(direction);
+
+        // 🔹 Nếu đang gần tường, dừng lại ngay và xoay hướng
+        if (CheckCollision(transform.position + (Vector3)direction * 0.5f))
+        {
+            grounded = true;
+            _playerAnimation.RotateOnCollision(direction);
+            return;
+        }
+
+        _playerAnimation.AnimaRolling();
 
         // 🔹 Chuyển động bằng Rigidbody2D
         _rb.linearVelocity = direction * speed;
