@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class LevelSelection : MonoBehaviour
 {
     [SerializeField] private Button quitButton;
-    [SerializeField] private Button[] levelButtons; // Mảng các nút level
+    [SerializeField] private GameObject[] levelObjects; // Mảng các GameObject chứa Button + Stars
 
     private void Awake()
     {
@@ -12,29 +12,45 @@ public class LevelSelection : MonoBehaviour
             Loader.Instance.LoadWithFade(SceneName.MainMenuScene);
         });
 
-        for (int i = 0; i < levelButtons.Length; i++)
+        for (int i = 0; i < levelObjects.Length; i++)
         {
             int levelIndex = i; // Lưu trữ chỉ số level
-            levelButtons[i].onClick.AddListener(() => {
-                Player.Instance.currentLevel = levelIndex;
-                Loader.Instance.LoadWithFade(SceneName.GameScene);
-                Debug.Log("GameManager.CurrentLevel: " + Player.Instance.currentLevel);
-                //Loader.Instance.LoadWithFade((SceneName)System.Enum.Parse(typeof(SceneName), "Level" + levelIndex));
-            });
+            Button levelButton = levelObjects[i].GetComponentInChildren<Button>(); // Lấy Button trong GameObject
+            if (levelButton != null)
+            {
+                levelButton.onClick.AddListener(() => {
+                    Player.Instance.currentLevel = levelIndex;
+                    Loader.Instance.LoadWithFade(SceneName.GameScene);
+                });
+            }
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         Player.Instance.LoadPlayer();
-
         int levelAt = Player.Instance.maxCurrentLevel;
 
-        for (int i = 0; i < levelButtons.Length; i++)
+        for (int i = 0; i < levelObjects.Length; i++)
         {
-            if (i > levelAt)
-                levelButtons[i].interactable = false;
+            Button levelButton = levelObjects[i].GetComponentInChildren<Button>(); // Lấy Button
+            Image[] starImages = levelObjects[i].GetComponentsInChildren<Image>(); // Lấy tất cả hình ảnh
+
+            if (levelButton != null)
+            {
+                levelButton.interactable = i <= levelAt;
+            }
+
+            int starsEarned = (i < Player.Instance.starsPerLevel.Length) ? Player.Instance.starsPerLevel[i] : 0;
+
+            // Cập nhật hình ảnh sao
+            for (int j = 0; j < 3; j++)
+            {
+                if (starImages.Length > j + 1) // Đảm bảo không lỗi mảng
+                {
+                    starImages[j + 1].enabled = j < starsEarned; // Bật/tắt hiển thị sao
+                }
+            }
         }
     }
 }

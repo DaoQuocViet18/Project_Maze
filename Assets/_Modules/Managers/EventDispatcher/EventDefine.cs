@@ -5,10 +5,7 @@ public partial class EventDefine : IEventParam
 
     public struct OnLoadScene : IEventParam { }
 
-    public struct OnIncreasePoint : IEventParam
-    {
-
-    }
+    public struct OnIncreaseStar : IEventParam { }
 
     public struct OnUpdateProgressBar : IEventParam
     {

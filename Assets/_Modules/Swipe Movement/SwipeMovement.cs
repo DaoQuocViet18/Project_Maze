@@ -89,11 +89,19 @@ public class SwipeMovement : MonoBehaviour
         grounded = false;
         _playerAnimation.RotateOnMove(direction);
 
-        // 🔹 Nếu đang gần tường, dừng lại ngay và xoay hướng
+        // 🔹 Nếu gần tường, trượt nhẹ về phía trước rồi quay lại
         if (CheckCollision(transform.position + (Vector3)direction * 0.5f))
         {
+            Vector3 initialPosition = transform.position;
+            Vector3 bumpPosition = transform.position + (Vector3)direction * 0.2f; // Trượt nhẹ lên một chút
+
+            transform.position = bumpPosition;
+            await UniTask.Delay(100);
+            transform.position = initialPosition; // Đảm bảo nhân vật trở về đúng vị trí cũ
+
             grounded = true;
             _playerAnimation.RotateOnCollision(direction);
+            _playerAnimation.AnimaIdle();
             return;
         }
 
@@ -104,7 +112,6 @@ public class SwipeMovement : MonoBehaviour
 
         // 🔹 Kiểm tra va chạm liên tục
         await UniTask.WaitUntil(() => CheckCollision(transform.position + (Vector3)direction * 0.5f));
-
 
         // 🔹 Dừng khi va chạm
         _rb.linearVelocity = Vector2.zero;
@@ -127,7 +134,10 @@ public class SwipeMovement : MonoBehaviour
 
     private bool CheckCollision(Vector3 targetPosition)
     {
-        return Physics2D.OverlapCircle(targetPosition, 0.1f, obstacleMask) != null;
+        Collider2D collider = Physics2D.OverlapCircle(targetPosition, 0.1f, obstacleMask);
+
+        // 🔥 Kiểm tra nếu collider tồn tại và không phải là Trigger
+        return collider != null && !collider.isTrigger;
     }
 
     private Vector3 GetAdjustedPosition()

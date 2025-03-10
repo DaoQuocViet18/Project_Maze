@@ -4,38 +4,25 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private float levelTimeMax;
-
-    [SerializeField] private int MaxPoint = 4;
-    [SerializeField] private int currentPoint = 0;
-
     public GameObject[] levelPrefabs; // Prefab của Level
     private GameObject currentLevelInstance; // Instance của Level hiện tại
-    private Level currentLevelComponent; // Component Level của Level hiện tại
+    public Level currentLevelComponent; // Component Level của Level hiện tại
 
     private void OnEnable()
     {
-        EventDispatcher.Add<EventDefine.OnIncreasePoint>(onIncreasePoint);
+        EventDispatcher.Add<EventDefine.OnIncreaseStar>(onIncreaseStar);
     }
 
     private void OnDisable()
     {
-        EventDispatcher.Remove<EventDefine.OnIncreasePoint>(onIncreasePoint);
+        EventDispatcher.Remove<EventDefine.OnIncreaseStar>(onIncreaseStar);
     }
+
 
     private void Start()
     {
-        
-        onLoadLevel(Player.Instance.currentLevel);
+        LoadLevel(Player.Instance.currentLevel);
         TimeRun();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            AudioManager.Instance.PlaySound(GameAudioClip.POP_SOUND_EFFECT);
-        }
     }
 
     public void TimeRun()
@@ -48,7 +35,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0;
     }
 
-    public void onLoadLevel(int levelIndex)
+    public void LoadLevel(int levelIndex)
     {
         if (currentLevelInstance != null)
         {
@@ -67,6 +54,7 @@ public class GameManager : Singleton<GameManager>
         // Tạo level mới từ Prefab
         currentLevelInstance = Instantiate(levelPrefabs[Player.Instance.currentLevel], transform.position, Quaternion.identity);
         currentLevelInstance.transform.parent = GameObject.Find("Environment").transform;
+
         // Lấy component Level từ GameObject
         currentLevelComponent = currentLevelInstance.GetComponent<Level>();
 
@@ -76,26 +64,24 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
-        // Cập nhật điểm số từ Level
-        MaxPoint = currentLevelComponent.MaxPoint;
-        currentPoint = 0;
+        // Reset star count khi bắt đầu level mới
+        currentLevelComponent.ResetStars();
     }
 
-    public void activeWinGame()
+    public void ActiveWinGame()
     {
         if (Player.Instance.currentLevel == Player.Instance.maxCurrentLevel && Player.Instance.maxCurrentLevel < levelPrefabs.Length - 1)
         {
             Player.Instance.maxCurrentLevel++;
         }
 
-        Debug.Log("MaxCurrentLevel: " + Player.Instance.maxCurrentLevel);
-        Debug.Log("currentLevel: " + Player.Instance.currentLevel);
-        Debug.Log("levels.Length: " + levelPrefabs.Length);
-
-        // Kiểm tra và gọi onWinGame từ Level component thay vì GameObject
+        // Kiểm tra và gọi onWinGame từ Level component
         if (currentLevelComponent != null)
         {
-            currentLevelComponent.onWinGame(() =>
+            int starsEarned = currentLevelComponent.currentStars; // Lấy số sao đạt được từ level hiện tại
+            Player.Instance.UpdateStarsForLevel(Player.Instance.currentLevel, starsEarned); // Cập nhật số sao cho level
+
+            currentLevelComponent.OnWinGame(() =>
             {
                 EventDispatcher.Dispatch(new EventDefine.OnWinGame());
                 Player.Instance.SavePlayer();
@@ -108,12 +94,11 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void activeLostGame()
+    public void ActiveLostGame()
     {
-        // Kiểm tra và gọi onLostGame từ Level component thay vì GameObject
         if (currentLevelComponent != null)
         {
-            currentLevelComponent.onLostGame(() =>
+            currentLevelComponent.OnLostGame(() =>
             {
                 EventDispatcher.Dispatch(new EventDefine.OnLoseGame());
                 TimeStop();
@@ -125,20 +110,22 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-   
-    public float getCurrenProgress()
+    private void onIncreaseStar(IEventParam param)
     {
-        return (float)currentPoint / MaxPoint;
-    }
-
-    private void onIncreasePoint(IEventParam param)
-    {
-        currentPoint++;
-        if (currentPoint == MaxPoint)
+        if (currentLevelComponent == null)
         {
-            //activeWinGame();
+            Debug.LogError("Không tìm thấy Level component!");
+            return;
         }
+
+        if (currentLevelComponent.currentStars < currentLevelComponent.MaxStars)
+        {
+            currentLevelComponent.currentStars++;
+        }
+
+        Debug.Log("currentStars: " + currentLevelComponent.currentStars);
 
         EventDispatcher.Dispatch(new EventDefine.OnUpdateProgressBar());
     }
+
 }

@@ -4,14 +4,17 @@ public class Person : MonoBehaviour, IInteractableObject
 {
     public void InteractGoal(GameObject targetObject)
     {
-        GameManager.Instance.activeWinGame();
+        GameManager.Instance.ActiveWinGame();
     }
 
     public void InteractGameOver(GameObject targetObject)
     {
-        Debug.Log("targetObject: " + targetObject);
         EventDispatcher.Dispatch(new EventDefine.OnLoseGame());
         GameManager.Instance.TimeStop();
     }
 
+    public void InteractStar(GameObject targetObject)
+    {
+        EventDispatcher.Dispatch(new EventDefine.OnIncreaseStar());
+    }
 }

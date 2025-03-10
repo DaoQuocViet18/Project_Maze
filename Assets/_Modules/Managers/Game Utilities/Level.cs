@@ -1,21 +1,33 @@
-using System;
+﻿using System;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Level : MonoBehaviour
 {
-    [SerializeField] public int MaxPoint = 3;
-    //[SerializeField] BubbleCharacter character;
+    public int currentStars = 0;
+    public int MaxStars = 3;
 
-    public void onWinGame(Action callback)
+    public void IncreaseStar()
     {
-        callback?.Invoke();
-        //character.animGoUp(callback);
+        if (currentStars < MaxStars)
+        {
+            currentStars++;
+            Debug.Log("Current Stars: " + currentStars);
+            EventDispatcher.Dispatch(new EventDefine.OnUpdateProgressBar());
+        }
     }
 
-    public void onLostGame(Action callback)
+    public void ResetStars()
+    {
+        currentStars = 0; // Reset số sao khi bắt đầu level mới
+    }
+
+    public void OnWinGame(Action callback)
     {
         callback?.Invoke();
-        //character.animGoUp(callback);
+    }
+
+    public void OnLostGame(Action callback)
+    {
+        callback?.Invoke();
     }
 }
