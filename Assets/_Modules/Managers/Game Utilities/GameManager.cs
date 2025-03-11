@@ -21,6 +21,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        Player.Instance.LoadPlayer(); 
         LoadLevel(Player.Instance.currentLevel);
         TimeRun();
     }

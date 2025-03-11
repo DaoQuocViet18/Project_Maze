@@ -18,6 +18,7 @@ public class Player : Singleton<Player>
         {
             starsPerLevel[levelIndex] = Mathf.Max(starsPerLevel[levelIndex], newStars);
         }
+        Debug.Log("levelIndex: " + levelIndex + " - newStars: " + newStars);
     }
 
     public void SavePlayer()
@@ -42,5 +43,19 @@ public class Player : Singleton<Player>
         {
             Debug.LogWarning("No save file found! Starting new game.");
         }
+        // Gọi hàm in debug sau khi load
+        //PrintStarsDebugInfo();
+    }
+
+    private void PrintStarsDebugInfo()
+    {
+        string output = "Stars per level: [";
+        for (int i = 0; i < starsPerLevel.Length; i++)
+        {
+            output += starsPerLevel[i] + (i < starsPerLevel.Length - 1 ? ", " : "");
+        }
+        output += "]";
+
+        Debug.Log(output);
     }
 }

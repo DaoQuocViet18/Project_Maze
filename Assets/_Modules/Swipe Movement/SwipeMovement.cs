@@ -85,7 +85,7 @@ public class SwipeMovement : MonoBehaviour
 
     private async UniTaskVoid StartMoving()
     {
-        if (!grounded) return;
+        if (!grounded || this == null || gameObject == null) return;
         grounded = false;
         _playerAnimation.RotateOnMove(direction);
 
@@ -98,8 +98,11 @@ public class SwipeMovement : MonoBehaviour
             _rb.linearVelocity = direction * speed;
 
         // 🔹 Kiểm tra va chạm liên tục
-        await UniTask.WaitUntil(() => CheckCollision(transform.position + (Vector3)direction * 0.5f));
+        await UniTask.WaitUntil(() => this != null && gameObject != null && CheckCollision(transform.position + (Vector3)direction * 0.5f));
         await UniTask.Delay(10);
+
+        // 🔥 Kiểm tra object trước khi tiếp tục
+        if (this == null || gameObject == null) return;
 
         // 🔹 Dừng khi va chạm
         _rb.linearVelocity = Vector2.zero;
@@ -108,6 +111,7 @@ public class SwipeMovement : MonoBehaviour
         _playerAnimation.RotateOnCollision(direction);
         _playerAnimation.AnimaIdle();
     }
+
 
     private bool CheckCollision(Vector3 targetPosition)
     {
