@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
         Player.Instance.LoadPlayer();
     }
