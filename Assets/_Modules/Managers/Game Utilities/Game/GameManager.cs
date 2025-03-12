@@ -125,8 +125,6 @@ public class GameManager : Singleton<GameManager>
         }
 
         Debug.Log("currentStars: " + currentLevelComponent.currentStars);
-
-        EventDispatcher.Dispatch(new EventDefine.OnUpdateProgressBar());
     }
 
 }

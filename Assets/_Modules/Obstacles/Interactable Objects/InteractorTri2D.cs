@@ -4,7 +4,8 @@ public class InteractorTri2D : MonoBehaviour
 {
     public enum InteractionTypeTri2D
     {
-        Star
+        Star,
+        Money
     }
 
     public InteractionTypeTri2D interactionType; // Biến enum để xác định loại tương tác
@@ -18,6 +19,10 @@ public class InteractorTri2D : MonoBehaviour
             {
                 case InteractionTypeTri2D.Star:
                     interactableObject.InteractStar(gameObject);
+                    gameObject.SetActive(false);
+                    break;
+                case InteractionTypeTri2D.Money:
+                    interactableObject.InteractMoney(gameObject);
                     gameObject.SetActive(false);
                     break;
             }

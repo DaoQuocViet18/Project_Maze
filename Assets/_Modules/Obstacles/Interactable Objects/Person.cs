@@ -17,4 +17,9 @@ public class Person : MonoBehaviour, IInteractableObject
     {
         EventDispatcher.Dispatch(new EventDefine.OnIncreaseStar());
     }
+
+    public void InteractMoney(GameObject targetObject)
+    {
+        EventDispatcher.Dispatch(new EventDefine.OnIncreaseMoney());
+    }
 }

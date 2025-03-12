@@ -6,11 +6,7 @@ public partial class EventDefine : IEventParam
     public struct OnLoadScene : IEventParam { }
 
     public struct OnIncreaseStar : IEventParam { }
-
-    public struct OnUpdateProgressBar : IEventParam
-    {
-
-    }
+    public struct OnIncreaseMoney : IEventParam { }
 
     public struct OnTutorialGame : IEventParam
     {

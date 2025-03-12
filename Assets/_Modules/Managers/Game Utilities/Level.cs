@@ -12,7 +12,6 @@ public class Level : MonoBehaviour
         {
             currentStars++;
             Debug.Log("Current Stars: " + currentStars);
-            EventDispatcher.Dispatch(new EventDefine.OnUpdateProgressBar());
         }
     }
 
