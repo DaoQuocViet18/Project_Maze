@@ -13,5 +13,4 @@ public class Person : MonoBehaviour, IInteractableObject
         EventDispatcher.Dispatch(new EventDefine.OnLoseGame());
         GameManager.Instance.TimeStop();
     }
-
 }
