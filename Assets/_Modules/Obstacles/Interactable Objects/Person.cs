@@ -14,7 +14,7 @@ public class Person : MonoBehaviour, IInteractableObject
 
     private void OnDisable()
     {
-        EventDispatcher.Add<EventDefine.OnActiveShield>(onActiveShield);
+        EventDispatcher.Remove<EventDefine.OnActiveShield>(onActiveShield);
         EventDispatcher.Remove<EventDefine.OnDisableShield>(onDisableShield);
     }
 
@@ -45,6 +45,6 @@ public class Person : MonoBehaviour, IInteractableObject
 
     public void InteractMoney(GameObject targetObject)
     {
-        EventDispatcher.Dispatch(new EventDefine.OnIncreaseMoney());
+        EventDispatcher.Dispatch(new EventDefine.OnIncreaseMoney { money = 1 });
     }
 }
