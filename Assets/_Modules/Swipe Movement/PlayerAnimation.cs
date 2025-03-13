@@ -1,19 +1,42 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
+using static EventDefine;
 
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer player_Image;
+    [SerializeField] private SpriteRenderer boundary_Image;
     [SerializeField] private Transform TransPlayerImage;
     [SerializeField] private ParticleSystem bouncingParticles;
     [SerializeField] private GameObject ObjectTrailRenderer;
 
     private float eulerAnglesY = -180;
 
+    private void Start()
+    {
+        boundary_Image.enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        EventDispatcher.Add<EventDefine.OnActiveShield>(onActiveShield);
+        EventDispatcher.Add<EventDefine.OnDisableShield>(onDisableShield);
+    }
+
+    private void OnDisable()
+    {
+        EventDispatcher.Remove<EventDefine.OnActiveShield>(onActiveShield);
+        EventDispatcher.Remove<EventDefine.OnDisableShield>(onDisableShield);
+    }
+
+    private void onActiveShield(IEventParam param) =>  boundary_Image.enabled = true;
+
+    private void onDisableShield(IEventParam param) => boundary_Image.enabled = false;
+
     public void SpriteFlipX(Vector2 swipeDelta)
     {
-        spriteRenderer.flipX = swipeDelta.x < 0;
+        player_Image.flipX = swipeDelta.x < 0;
     }
 
     public void AnimaRolling()

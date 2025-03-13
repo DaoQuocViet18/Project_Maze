@@ -1,29 +1,28 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-public class Interactor : MonoBehaviour
+public class InteractorCol2D : MonoBehaviour
 {
-    public enum InteractionType
+    public enum InteractionTypeCol2D
     {
         Goal,
         GameOver
     }
 
-    public InteractionType interactionType; // Biến enum để xác định loại tương tác
+    public InteractionTypeCol2D interactionType; // Biến enum để xác định loại tương tác
+    [SerializeField] private bool CanBeShielded = false;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("OnCollisionEnter2D");
-
         if (other.collider.TryGetComponent(out IInteractableObject interactableObject))
         {
             switch (interactionType)
             {
-                case InteractionType.Goal:
+                case InteractionTypeCol2D.Goal:
                     interactableObject.InteractGoal(gameObject);
                     break;
-                case InteractionType.GameOver:
-                    interactableObject.InteractGameOver(gameObject);
+                case InteractionTypeCol2D.GameOver:
+                    interactableObject.InteractGameOver(gameObject, CanBeShielded);
                     break;
             }
         }

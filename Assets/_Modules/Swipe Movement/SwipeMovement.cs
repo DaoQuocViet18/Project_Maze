@@ -85,59 +85,39 @@ public class SwipeMovement : MonoBehaviour
 
     private async UniTaskVoid StartMoving()
     {
-        if (!grounded) return;
+        if (!grounded || this == null || gameObject == null) return;
         grounded = false;
         _playerAnimation.RotateOnMove(direction);
-
-        // 🔹 Nếu đang gần tường, dừng lại ngay và xoay hướng
-        if (CheckCollision(transform.position + (Vector3)direction * 0.5f))
-        {
-            grounded = true;
-            _playerAnimation.RotateOnCollision(direction);
-            return;
-        }
 
         _playerAnimation.AnimaRolling();
 
         // 🔹 Chuyển động bằng Rigidbody2D
-        _rb.linearVelocity = direction * speed;
+        if (CheckCollision(transform.position + (Vector3)direction * 0.5f))
+            _rb.linearVelocity = direction * speed * 0.2f;
+        else
+            _rb.linearVelocity = direction * speed;
 
         // 🔹 Kiểm tra va chạm liên tục
-        await UniTask.WaitUntil(() => CheckCollision(transform.position + (Vector3)direction * 0.5f));
+        await UniTask.WaitUntil(() => this != null && gameObject != null && CheckCollision(transform.position + (Vector3)direction * 0.5f));
+        await UniTask.Delay(50);
 
+        // 🔥 Kiểm tra object trước khi tiếp tục
+        if (this == null || gameObject == null) return;
 
         // 🔹 Dừng khi va chạm
         _rb.linearVelocity = Vector2.zero;
-
-        transform.position = GetAdjustedPosition();
 
         grounded = true;
         _playerAnimation.RotateOnCollision(direction);
         _playerAnimation.AnimaIdle();
     }
 
-    private void FixedUpdate()
-    {
-        if (!grounded && CheckCollision(transform.position + (Vector3)direction * 0.5f))
-        {
-            _rb.linearVelocity = Vector2.zero; // 🔥 Dừng lại ngay khi chạm vật cản
-            grounded = true;
-        }
-    }
 
     private bool CheckCollision(Vector3 targetPosition)
     {
-        return Physics2D.OverlapCircle(targetPosition, 0.1f, obstacleMask) != null;
-    }
+        Collider2D collider = Physics2D.OverlapCircle(targetPosition, 0.1f, obstacleMask);
 
-    private Vector3 GetAdjustedPosition()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, obstacleMask);
-        if (hit.collider != null)
-        {
-            float adjustedDistance = Mathf.Max(hit.distance - 0.05f, 0f); // Đảm bảo không lùi vào trong vật cản
-            return transform.position + (Vector3)direction * adjustedDistance;
-        }
-        return transform.position;
+        // 🔥 Kiểm tra nếu collider tồn tại và không phải là Trigger
+        return collider != null && !collider.isTrigger;
     }
 }

@@ -1,16 +1,48 @@
+﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
+using static EventDefine;
 
 public class Person : MonoBehaviour, IInteractableObject
 {
-    public void InteractGoal(GameObject targetObject)
+    [SerializeField] private bool IsShielding = false;
+
+    private void OnEnable()
     {
-        GameManager.Instance.activeWinGame();
+        EventDispatcher.Add<EventDefine.OnActiveShield>(onActiveShield);
+        EventDispatcher.Add<EventDefine.OnDisableShield>(onDisableShield);
     }
 
-    public void InteractGameOver(GameObject targetObject)
+    private void OnDisable()
     {
-        Debug.Log("targetObject: " + targetObject);
+        EventDispatcher.Add<EventDefine.OnActiveShield>(onActiveShield);
+        EventDispatcher.Remove<EventDefine.OnDisableShield>(onDisableShield);
+    }
+
+    private void onActiveShield(IEventParam param) => IsShielding = true;
+
+    private void onDisableShield(IEventParam param) => IsShielding = false;
+
+    public void InteractGoal(GameObject targetObject)
+    {
+        GameManager.Instance.ActiveWinGame();
+    }
+
+    public void InteractGameOver(GameObject targetObject, bool CanBeShielded)
+    {
+        if (IsShielding == true && CanBeShielded == true)
+        {
+            EventDispatcher.Dispatch(new EventDefine.OnDisableShield());
+            return;
+        }
         EventDispatcher.Dispatch(new EventDefine.OnLoseGame());
         GameManager.Instance.TimeStop();
+    }
+    public void InteractStar(GameObject targetObject)
+    {
+        EventDispatcher.Dispatch(new EventDefine.OnIncreaseStar());
+    }
+    public void InteractMoney(GameObject targetObject)
+    {
+        EventDispatcher.Dispatch(new EventDefine.OnIncreaseMoney());
     }
 }
