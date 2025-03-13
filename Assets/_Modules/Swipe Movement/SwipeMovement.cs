@@ -99,7 +99,7 @@ public class SwipeMovement : MonoBehaviour
 
         // 🔹 Kiểm tra va chạm liên tục
         await UniTask.WaitUntil(() => this != null && gameObject != null && CheckCollision(transform.position + (Vector3)direction * 0.5f));
-        await UniTask.Delay(10);
+        await UniTask.Delay(50);
 
         // 🔥 Kiểm tra object trước khi tiếp tục
         if (this == null || gameObject == null) return;

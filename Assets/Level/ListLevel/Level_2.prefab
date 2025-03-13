@@ -4993,6 +4993,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyStatic_Glasses_4
       objectReference: {fileID: 0}
+    - target: {fileID: 7663388720977926969, guid: 74e70d79d1087e34cb3ccd78ebbd7624, type: 3}
+      propertyPath: CanBeShielded
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

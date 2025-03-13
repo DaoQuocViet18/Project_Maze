@@ -10,6 +10,7 @@ public class InteractorCol2D : MonoBehaviour
     }
 
     public InteractionTypeCol2D interactionType; // Biến enum để xác định loại tương tác
+    [SerializeField] private bool CanBeShielded = false;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -21,7 +22,7 @@ public class InteractorCol2D : MonoBehaviour
                     interactableObject.InteractGoal(gameObject);
                     break;
                 case InteractionTypeCol2D.GameOver:
-                    interactableObject.InteractGameOver(gameObject);
+                    interactableObject.InteractGameOver(gameObject, CanBeShielded);
                     break;
             }
         }

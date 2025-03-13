@@ -7,6 +7,8 @@ public partial class EventDefine : IEventParam
 
     public struct OnIncreaseStar : IEventParam { }
     public struct OnIncreaseMoney : IEventParam { }
+    public struct OnActiveShield : IEventParam { }
+    public struct OnDisableShield : IEventParam { }
 
     public struct OnTutorialGame : IEventParam
     {
