@@ -18,10 +18,13 @@ public class GameManager : Singleton<GameManager>
         EventDispatcher.Remove<EventDefine.OnIncreaseStar>(onIncreaseStar);
     }
 
+    private void Awake()
+    {
+        Player.Instance.LoadPlayer();
+    }
 
     private void Start()
     {
-        Player.Instance.LoadPlayer(); 
         LoadLevel(Player.Instance.currentLevel);
         TimeRun();
     }

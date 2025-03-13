@@ -6,6 +6,7 @@ public class Player : Singleton<Player>
     public int maxCurrentLevel = 0;
     public int currentLevel = 0;
     public int money = 0;
+    public int shield = 0;
     public int[] starsPerLevel = new int[10];
 
     public void UpdateStarsForLevel(int levelIndex, int newStars)
@@ -32,9 +33,9 @@ public class Player : Singleton<Player>
             PlayerData data = SaveSystem.LoadPlayer();
             this.maxCurrentLevel = data.maxCurrentLevel;
             this.money = data.money;
+            this.shield = data.shield;
             this.starsPerLevel = data.starsPerLevel ?? new int[10];
 
-            Debug.Log("data.money: " + data.money);
             Debug.Log("Save file found! Loading player data...");
         }
         else

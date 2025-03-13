@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static EventDefine;
 
 public class MoneyUI : MonoBehaviour
 {
@@ -15,25 +16,43 @@ public class MoneyUI : MonoBehaviour
 
     private void Start()
     {
-        moneyText.text = Player.Instance.money.ToString();
+        moneyText.text = Player.Instance.money.ToString(); // Cập nhật UI
     }
 
     private void OnEnable()
     {
         EventDispatcher.Add<EventDefine.OnIncreaseMoney>(OnIncreaseMoney);
+        EventDispatcher.Add<EventDefine.OnDecreaseMoney>(OnDecreaseMoney);
     }
 
     private void OnDisable()
     {
         EventDispatcher.Remove<EventDefine.OnIncreaseMoney>(OnIncreaseMoney);
+        EventDispatcher.Remove<EventDefine.OnDecreaseMoney>(OnDecreaseMoney);
     }
 
     private void OnIncreaseMoney(IEventParam param)
     {
-        int moneyAmount = ++Player.Instance.money; 
-        moneyText.text = moneyAmount.ToString(); // ✅ Cập nhật UI
+        if (param is OnIncreaseMoney increaseMoneyEvent)
+        {
+            Player.Instance.money += increaseMoneyEvent.money; // ✅ Tăng số tiền theo giá trị truyền vào
+            AudioManager.Instance.PlaySound(GameAudioClip.COLLECT);
+            UpdateMoneyUI();
+        }
+    }
 
-        AudioManager.Instance.PlaySound(GameAudioClip.COLLECT);
+    private void OnDecreaseMoney(IEventParam param)
+    {
+        if (param is OnDecreaseMoney decreaseMoneyEvent)
+        {
+            Player.Instance.money -= decreaseMoneyEvent.money; // ✅ Giảm số tiền theo giá trị truyền vào
+            UpdateMoneyUI();
+        }
+    }
+
+    private void UpdateMoneyUI()
+    {
+        moneyText.text = Player.Instance.money.ToString(); // Cập nhật UI
         Player.Instance.SavePlayer();
     }
 }
