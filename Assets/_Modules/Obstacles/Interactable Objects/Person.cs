@@ -45,4 +45,8 @@ public class Person : MonoBehaviour, IInteractableObject
     {
         EventDispatcher.Dispatch(new EventDefine.OnIncreaseMoney { money = 1 });
     }
+    public void InteractPoint(GameObject targetObject)
+    {
+        EventDispatcher.Dispatch(new EventDefine.OnIncreasePoint { point = 1 });
+    }
 }

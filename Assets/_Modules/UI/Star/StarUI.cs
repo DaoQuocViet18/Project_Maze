@@ -4,12 +4,45 @@ using UnityEngine.UI;
 
 public class StarUI : MonoBehaviour
 {
-    [SerializeField] private GameObject[] stars; // Mảng chứa các sao (GameObject)
+    [SerializeField] private GameObject[] stars; // Mảng chứa các sao chưa kích hoạt
     [SerializeField] private GameObject StarPanel;
+    [SerializeField] private Image[] StarActivated; // Mảng chứa các image sao đã kích hoạt
 
     private void Awake()
     {
         StarPanel.SetActive(true);
+
+        // Kiểm tra số lượng sao trong hai mảng
+        if (stars.Length != StarActivated.Length)
+        {
+            Debug.LogError($"Số lượng sao không khớp! stars: {stars.Length}, StarActivated: {StarActivated.Length}");
+            return;
+        }
+
+        // Kiểm tra các phần tử null
+        for (int i = 0; i < stars.Length; i++)
+        {
+            if (stars[i] == null)
+            {
+                Debug.LogError($"Phần tử stars[{i}] là null!");
+                return;
+            }
+        }
+
+        for (int i = 0; i < StarActivated.Length; i++)
+        {
+            if (StarActivated[i] == null)
+            {
+                Debug.LogError($"Phần tử StarActivated[{i}] là null!");
+                return;
+            }
+        }
+
+        // Ẩn tất cả các sao đã kích hoạt khi bắt đầu
+        foreach (var star in StarActivated)
+        {
+            star.gameObject.SetActive(false);
+        }
     }
 
     private void OnEnable()
@@ -24,21 +57,34 @@ public class StarUI : MonoBehaviour
 
     private void OnIncreaseStar(IEventParam param)
     {
+        // Kiểm tra mảng có hợp lệ không
+        if (stars == null || StarActivated == null || stars.Length == 0 || StarActivated.Length == 0)
+        {
+            Debug.LogError("Mảng stars hoặc StarActivated không hợp lệ!");
+            return;
+        }
+
         // 🔹 Lấy số sao đã kích hoạt hiện tại
-        int activeStars = stars.Count(star => star.GetComponent<Image>().color == Color.yellow);
+        int activeStars = StarActivated.Count(star => star.gameObject.activeSelf);
 
         // 🔹 Nếu đã kích hoạt hết sao thì không làm gì
         if (activeStars >= stars.Length) return;
 
-        // 🔹 Đổi màu sao tiếp theo
-        if (stars[activeStars].TryGetComponent<Image>(out Image starImage))
+        // Kiểm tra chỉ số mảng trước khi truy cập
+        if (activeStars < 0 || activeStars >= stars.Length || activeStars >= StarActivated.Length)
         {
-            starImage.color = Color.yellow; // ✅ Đổi màu sao tiếp theo
+            Debug.LogError($"Chỉ số không hợp lệ! activeStars: {activeStars}, stars.Length: {stars.Length}, StarActivated.Length: {StarActivated.Length}");
+            return;
         }
-        else
+
+        // 🔹 Ẩn sao chưa kích hoạt
+        if (stars[activeStars].TryGetComponent<Image>(out Image originalImage))
         {
-            Debug.LogError($"GameObject {stars[activeStars].name} does not have an Image component!");
+            originalImage.enabled = false;
         }
+
+        // 🔹 Hiện sao đã kích hoạt
+        StarActivated[activeStars].gameObject.SetActive(true);
 
         // 🔹 Phát âm thanh nếu đạt max sao
         if (activeStars + 1 == stars.Length)
@@ -47,5 +93,4 @@ public class StarUI : MonoBehaviour
             AudioManager.Instance.PlaySound(GameAudioClip.WOA);
         }
     }
-
 }

@@ -7,4 +7,5 @@ public interface IInteractableObject
     public void InteractStar(GameObject targetObject);
 
     public void InteractMoney(GameObject targetObject);
+    public void InteractPoint(GameObject targetObject);
 }

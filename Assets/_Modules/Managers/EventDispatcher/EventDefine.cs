@@ -10,9 +10,13 @@ public partial class EventDefine : IEventParam
     {
         public int money;
     }
-    public struct OnDecreaseMoney : IEventParam 
+    public struct OnDecreaseMoney : IEventParam
     {
         public int money;
+    }
+    public struct OnIncreasePoint : IEventParam
+    {
+        public int point;
     }
     public struct OnActiveShield : IEventParam { }
     public struct OnDisableShield : IEventParam { }

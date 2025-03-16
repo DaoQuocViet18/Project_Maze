@@ -1606,6 +1606,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 267718980174696803}
     m_Modifications:
+    - target: {fileID: 707255081992361739, guid: 301a3dc6d7389fc41836b411506b45c3, type: 3}
+      propertyPath: activatedStarPrefab
+      value: 
+      objectReference: {fileID: 6598981329910083592, guid: 7da333d45d97e8a488072482a8ed2765, type: 3}
     - target: {fileID: 3269288798835808948, guid: 301a3dc6d7389fc41836b411506b45c3, type: 3}
       propertyPath: m_Name
       value: StarUI
@@ -1690,6 +1694,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6945772035100158776, guid: 301a3dc6d7389fc41836b411506b45c3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4592894075970596442, guid: 2eaf31749816d8b4dae4a59a8e76a566, type: 3}
+    - target: {fileID: 7805055205845420084, guid: 301a3dc6d7389fc41836b411506b45c3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4592894075970596442, guid: 2eaf31749816d8b4dae4a59a8e76a566, type: 3}
+    - target: {fileID: 8693643272217025792, guid: 301a3dc6d7389fc41836b411506b45c3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4592894075970596442, guid: 2eaf31749816d8b4dae4a59a8e76a566, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1786,6 +1802,22 @@ PrefabInstance:
     - target: {fileID: 2033528632328574448, guid: 929029dc326932449ac880e74cb4292e, type: 3}
       propertyPath: m_Name
       value: MoneyUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100183274938480370, guid: 929029dc326932449ac880e74cb4292e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6643812617368022401, guid: 2eaf31749816d8b4dae4a59a8e76a566, type: 3}
+    - target: {fileID: 2100183274938480370, guid: 929029dc326932449ac880e74cb4292e, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100183274938480370, guid: 929029dc326932449ac880e74cb4292e, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100183274938480370, guid: 929029dc326932449ac880e74cb4292e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
