@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 53bc202b26d2c404983dbe74e0fc9c72
+guid: fda0d4d9102a5a649a17d55c52d3190e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6436721906915322329
-    second: Piranha_Plant_0
-  - first:
-      213: 683530661105422622
-    second: Piranha_Plant_1
-  - first:
-      213: -7309553940538093085
-    second: Piranha_Plant_2
-  - first:
-      213: 3658194308839598091
-    second: Piranha_Plant_3
+      213: -3315142031019513266
+    second: Piranha_Plant_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -105,17 +96,56 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Piranha_Plant_0
+      name: Piranha_Plant_2_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 63
-        width: 64
-        height: 98
+        x: 0
+        y: 0
+        width: 32
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,74 +154,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7265654678b2ca6a0800000000000000
-      internalID: -6436721906915322329
+      spriteID: e4a6d1d13ef3ef1d0800000000000000
+      internalID: -3315142031019513266
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Piranha_Plant_1
+      name: Piranha_Plant_2_1
       rect:
         serializedVersion: 2
-        x: 63
-        y: 159
-        width: 98
-        height: 64
+        x: 32
+        y: 0
+        width: 32
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e11d648c3836c7900800000000000000
-      internalID: 683530661105422622
+      spriteID: 5ec9df11eb93c714184c37c3554d5970
+      internalID: -1290051649
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Piranha_Plant_2
+      name: Piranha_Plant_2_2
       rect:
         serializedVersion: 2
-        x: 159
-        y: 63
-        width: 64
-        height: 98
+        x: 64
+        y: 0
+        width: 32
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3e19ba33b6f3f8a90800000000000000
-      internalID: -7309553940538093085
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Piranha_Plant_3
-      rect:
-        serializedVersion: 2
-        x: 63
-        y: 1
-        width: 98
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b086db9875484c230800000000000000
-      internalID: 3658194308839598091
+      spriteID: f1975f96d3c023b4794ecf52227e7d44
+      internalID: 1412879471
       vertices: []
       indices: 
       edges: []
@@ -200,7 +208,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 79cd67a3637c8b345b4b543b511e334f
     internalID: 0
     vertices: []
     indices: 
@@ -210,10 +218,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Piranha_Plant_0: -6436721906915322329
-      Piranha_Plant_1: 683530661105422622
-      Piranha_Plant_2: -7309553940538093085
-      Piranha_Plant_3: 3658194308839598091
+      Piranha_Plant_2_0: -3315142031019513266
+      Piranha_Plant_2_1: -1290051649
+      Piranha_Plant_2_2: 1412879471
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

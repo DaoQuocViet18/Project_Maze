@@ -824,11 +824,11 @@ PrefabInstance:
     - target: {fileID: 5105729643335692243, guid: beea97e1507f8f34cbce6ff8f0720952, type: 3}
       propertyPath: 'levelPrefabs.Array.data[0]'
       value: 
-      objectReference: {fileID: 800823879723473446, guid: a59532662211e224e89f64b95ca6eeb2, type: 3}
+      objectReference: {fileID: 8803040211486038380, guid: c192796f65ca1464fa86a06d53565a08, type: 3}
     - target: {fileID: 5105729643335692243, guid: beea97e1507f8f34cbce6ff8f0720952, type: 3}
       propertyPath: 'levelPrefabs.Array.data[1]'
       value: 
-      objectReference: {fileID: 8803040211486038380, guid: c192796f65ca1464fa86a06d53565a08, type: 3}
+      objectReference: {fileID: 800823879723473446, guid: a59532662211e224e89f64b95ca6eeb2, type: 3}
     - target: {fileID: 6490757697276979845, guid: beea97e1507f8f34cbce6ff8f0720952, type: 3}
       propertyPath: m_Name
       value: GameManager

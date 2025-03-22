@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 2eaf31749816d8b4dae4a59a8e76a566
+guid: b7d1db1e8a23ea74588342c3eeb1f7d2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4592894075970596442
-    second: Star_Money_Point_0
+      213: -7130588369274393640
+    second: Square_Shield_0
   - first:
-      213: 122424480192860090
-    second: Star_Money_Point_1
+      213: 7672332086211252868
+    second: Square_Shield_1
   - first:
-      213: 9004513552260008847
-    second: Star_Money_Point_2
+      213: 3672388354140483397
+    second: Square_Shield_2
   - first:
-      213: -6643812617368022401
-    second: Star_Money_Point_3
+      213: -7396466665568728263
+    second: Square_Shield_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -105,17 +105,56 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Star_Money_Point_0
+      name: Square_Shield_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 35
-        width: 26
-        height: 26
+        x: 9
+        y: 9
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a5e2931f3dc3dbf30800000000000000
-      internalID: 4592894075970596442
+      spriteID: 8db2ed958af0b0d90800000000000000
+      internalID: -7130588369274393640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Money_Point_1
+      name: Square_Shield_1
       rect:
         serializedVersion: 2
-        x: 35
-        y: 35
-        width: 26
-        height: 26
+        x: 73
+        y: 9
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +185,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: abf05b58a60f2b100800000000000000
-      internalID: 122424480192860090
+      spriteID: 4821475f169997a60800000000000000
+      internalID: 7672332086211252868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Money_Point_2
+      name: Square_Shield_2
       rect:
         serializedVersion: 2
-        x: 11
-        y: 11
-        width: 10
-        height: 10
+        x: 137
+        y: 9
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +207,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f8b06a92e5576fc70800000000000000
-      internalID: 9004513552260008847
+      spriteID: 54f23dd30c1f6f230800000000000000
+      internalID: 3672388354140483397
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Money_Point_3
+      name: Square_Shield_3
       rect:
         serializedVersion: 2
-        x: 39
-        y: 7
-        width: 18
-        height: 18
+        x: 201
+        y: 9
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f72558bff9f6cc3a0800000000000000
-      internalID: -6643812617368022401
+      spriteID: 93b02cd71c87a5990800000000000000
+      internalID: -7396466665568728263
       vertices: []
       indices: 
       edges: []
@@ -210,10 +249,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Star_Money_Point_0: 4592894075970596442
-      Star_Money_Point_1: 122424480192860090
-      Star_Money_Point_2: 9004513552260008847
-      Star_Money_Point_3: -6643812617368022401
+      Square_Shield_0: -7130588369274393640
+      Square_Shield_1: 7672332086211252868
+      Square_Shield_2: 3672388354140483397
+      Square_Shield_3: -7396466665568728263
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
