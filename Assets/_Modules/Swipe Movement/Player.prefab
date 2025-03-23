@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7051124172632580256}
   - component: {fileID: 5974582643311309084}
+  - component: {fileID: 1374802023399341092}
   m_Layer: 7
-  m_Name: boundary_Image
+  m_Name: Shield_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6267046366510649748}
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 859086375
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -7130588369274393640, guid: b7d1db1e8a23ea74588342c3eeb1f7d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,6 +88,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1374802023399341092
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444058367669087255}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2966335a9cad96f4db389af4ddba8a91, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &809395572855495653
 GameObject:
   m_ObjectHideFlags: 0
@@ -5510,12 +5533,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2963b6fc22ea34fb5fb1958988b49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2175471997984515161}
-  player_Image: {fileID: 3289031317973838385}
-  boundary_Image: {fileID: 5974582643311309084}
-  TransPlayerImage: {fileID: 1081772091798870074}
+  playerAnim: {fileID: 2175471997984515161}
+  shieldAnim: {fileID: 1374802023399341092}
+  playerImage: {fileID: 3289031317973838385}
+  shieldImage: {fileID: 5974582643311309084}
+  playerImageTrans: {fileID: 1081772091798870074}
   bouncingParticles: {fileID: 6324381751298469790}
-  ObjectTrailRenderer: {fileID: 6419092484670765859}
+  objectTrailRenderer: {fileID: 6419092484670765859}
 --- !u!114 &7753478735462781653
 MonoBehaviour:
   m_ObjectHideFlags: 0

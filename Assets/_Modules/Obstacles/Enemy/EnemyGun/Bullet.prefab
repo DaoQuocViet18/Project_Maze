@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 1
-  CanBeShielded: 0
+  CanBeShielded: 1
 --- !u!114 &6656009867564617654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,4 +180,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec72822c7796154a9a6a356d24dba7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootObject: {fileID: 5922979500395907798, guid: 798c107524b680447adf07a1621a05d9, type: 3}

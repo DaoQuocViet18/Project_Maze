@@ -4,18 +4,19 @@ using static EventDefine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
-    [SerializeField] private SpriteRenderer player_Image;
-    [SerializeField] private SpriteRenderer boundary_Image;
-    [SerializeField] private Transform TransPlayerImage;
+    [SerializeField] private Animator playerAnim;
+    [SerializeField] private Animator shieldAnim;
+    [SerializeField] private SpriteRenderer playerImage;
+    [SerializeField] private SpriteRenderer shieldImage;
+    [SerializeField] private Transform playerImageTrans;
     [SerializeField] private ParticleSystem bouncingParticles;
-    [SerializeField] private GameObject ObjectTrailRenderer;
+    [SerializeField] private GameObject objectTrailRenderer;
 
     private float eulerAnglesY = -180;
 
     private void Start()
     {
-        boundary_Image.enabled = false;
+        shieldImage.enabled = false;
     }
 
     private void OnEnable()
@@ -30,31 +31,39 @@ public class PlayerAnimation : MonoBehaviour
         EventDispatcher.Remove<EventDefine.OnDisableShield>(onDisableShield);
     }
 
-    private void onActiveShield(IEventParam param) =>  boundary_Image.enabled = true;
+    private void onActiveShield(IEventParam param)
+    {
+        shieldImage.enabled = true;
+        shieldAnim.CrossFade("Shield_TurnOn", 0.1f);
+    }
 
-    private void onDisableShield(IEventParam param) => boundary_Image.enabled = false;
+    private void onDisableShield(IEventParam param)
+    {
+        shieldAnim.CrossFade("Shield_Idle", 0.1f);
+        shieldImage.enabled = false;
+    }
 
     public void SpriteFlipX(Vector2 swipeDelta)
     {
-        player_Image.flipX = swipeDelta.x < 0;
+        playerImage.flipX = swipeDelta.x < 0;
     }
 
     public void AnimaRolling()
     {
         bouncingParticles.Stop(true);   // Dừng hệ thống hạt
         bouncingParticles.Clear();      // Xóa toàn bộ hạt đang tồn tại ngay lập tức
-        animator.CrossFade("Player_Image_Rolling", 0.1f);
+        playerAnim.CrossFade("Player_Image_Rolling", 0.1f);
     }
 
     public void AnimaIdle()
     {
-        bouncingParticles.Play();  
-        animator.CrossFade("Player_Image_Idle", 0.1f);
+        bouncingParticles.Play();
+        playerAnim.CrossFade("Player_Image_Idle", 0.1f);
     }
 
     public void RotateOnMove(Vector2 direction)
     {
-        ObjectTrailRenderer.SetActive(false);
+        objectTrailRenderer.SetActive(false);
 
         float rotationX = 0, rotationY = 0, rotationZ = 0;
         float trailRotationZ = 0;
@@ -84,10 +93,10 @@ public class PlayerAnimation : MonoBehaviour
             eulerAnglesY = 180;
         }
 
-        TransPlayerImage.eulerAngles = new Vector3(rotationX, rotationY, rotationZ);
-        ObjectTrailRenderer.transform.rotation = Quaternion.Euler(0, 0, trailRotationZ);
+        playerImageTrans.eulerAngles = new Vector3(rotationX, rotationY, rotationZ);
+        objectTrailRenderer.transform.rotation = Quaternion.Euler(0, 0, trailRotationZ);
 
-        ObjectTrailRenderer.SetActive(true);
+        objectTrailRenderer.SetActive(true);
     }
 
     public void RotateOnCollision(Vector2 direction)
@@ -97,12 +106,12 @@ public class PlayerAnimation : MonoBehaviour
         if (direction == Vector2.right)
         {
             rotationZ = 90;
-            TransPlayerImage.eulerAngles = new Vector3(0, eulerAnglesY, (eulerAnglesY == 0) ? rotationZ : -rotationZ);
+            playerImageTrans.eulerAngles = new Vector3(0, eulerAnglesY, (eulerAnglesY == 0) ? rotationZ : -rotationZ);
         }
         else if (direction == Vector2.left)
         {
             rotationZ = -90;
-            TransPlayerImage.eulerAngles = new Vector3(0, eulerAnglesY, (eulerAnglesY == 0) ? rotationZ : -rotationZ);
+            playerImageTrans.eulerAngles = new Vector3(0, eulerAnglesY, (eulerAnglesY == 0) ? rotationZ : -rotationZ);
         }
     }
 }

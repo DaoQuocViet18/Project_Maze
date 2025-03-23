@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionType: 2
-  animationTri2D: {fileID: 7004860368994781867}
+  animationTri2D: {fileID: 2150489863497916317}
 --- !u!1 &5851373344418839408
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,8 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5887543399900803833}
   - component: {fileID: 1702639526062608277}
-  - component: {fileID: 2961127820374416688}
-  - component: {fileID: 7004860368994781867}
+  - component: {fileID: 2150489863497916317}
   m_Layer: 6
   m_Name: Img_Point
   m_TagString: Untagged
@@ -211,29 +210,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &2961127820374416688
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5851373344418839408}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: afe9af1328fce8448bd92c2d4a2efed0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7004860368994781867
+--- !u!114 &2150489863497916317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,4 +222,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39725fba7cc6880488e762fe1df231c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2961127820374416688}
+  animator: {fileID: 0}
