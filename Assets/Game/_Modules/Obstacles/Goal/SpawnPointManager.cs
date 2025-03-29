@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnPointManager : MonoBehaviour
 {
     [SerializeField] private Tilemap wallTilemap;
     [SerializeField] private Tilemap floorTilemap;
