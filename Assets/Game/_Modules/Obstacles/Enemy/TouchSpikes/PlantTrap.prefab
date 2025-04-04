@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6014801827092869810}
   - component: {fileID: 7496518795889830094}
   - component: {fileID: 8976536578235864439}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 3202952854341109943}
   - component: {fileID: 2035583311034010808}
   - component: {fileID: 1552364119190242408}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4001900105318659850}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: PlantTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 8874931557591092325}
   - component: {fileID: 6613190639649080051}
   - component: {fileID: 2116876883445469764}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 4068907212858637500}
   - component: {fileID: 2821210798870658470}
   - component: {fileID: 6622126188306072859}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
