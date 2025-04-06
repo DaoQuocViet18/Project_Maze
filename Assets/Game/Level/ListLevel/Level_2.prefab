@@ -4756,6 +4756,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyStatic_Glasses_4 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5181610859888607047, guid: 74e70d79d1087e34cb3ccd78ebbd7624, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4916,7 +4920,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 618370872656987709, guid: 74e70d79d1087e34cb3ccd78ebbd7624, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.525
+      value: -16.5
       objectReference: {fileID: 0}
     - target: {fileID: 618370872656987709, guid: 74e70d79d1087e34cb3ccd78ebbd7624, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5242,7 +5246,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 618370872656987709, guid: 74e70d79d1087e34cb3ccd78ebbd7624, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.525
+      value: -16.5
       objectReference: {fileID: 0}
     - target: {fileID: 618370872656987709, guid: 74e70d79d1087e34cb3ccd78ebbd7624, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5308,7 +5312,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 618370872656987709, guid: 74e70d79d1087e34cb3ccd78ebbd7624, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.525
+      value: -16.5
       objectReference: {fileID: 0}
     - target: {fileID: 618370872656987709, guid: 74e70d79d1087e34cb3ccd78ebbd7624, type: 3}
       propertyPath: m_LocalPosition.y

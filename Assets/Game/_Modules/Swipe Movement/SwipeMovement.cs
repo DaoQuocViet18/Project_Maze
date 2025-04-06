@@ -114,13 +114,6 @@ public class SwipeMovement : MonoBehaviour
 
     public Vector3 targetPosition;
 
-    // Vẽ Gizmos cho vùng kiểm tra va chạm
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere((transform.position + (Vector3)direction * 0.5f), 0.1f);
-    }
-
     private bool CheckCollision(Vector3 targetPosition)
     {
         Collider2D collider = Physics2D.OverlapCircle(targetPosition, 0.1f, obstacleMask);
