@@ -44,6 +44,7 @@ public class Person : MonoBehaviour, IInteractableObject
     public void InteractMoney(GameObject targetObject)
     {
         EventDispatcher.Dispatch(new EventDefine.OnIncreaseMoney { money = 1 });
+        AudioManager.Instance.PlaySound(GameAudioClip.COLLECT);
     }
     public void InteractPoint(GameObject targetObject)
     {

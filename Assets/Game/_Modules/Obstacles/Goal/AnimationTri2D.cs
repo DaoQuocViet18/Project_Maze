@@ -40,6 +40,6 @@ public class AnimationTri2D : MonoBehaviour
 
     private void DeactivateObject()
     {
-        transform.parent.gameObject.SetActive(false);
+        Destroy(transform.parent.gameObject);
     }
 }

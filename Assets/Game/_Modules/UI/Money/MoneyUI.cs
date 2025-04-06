@@ -36,7 +36,6 @@ public class MoneyUI : MonoBehaviour
         if (param is OnIncreaseMoney increaseMoneyEvent)
         {
             Player.Instance.money += increaseMoneyEvent.money; // ✅ Tăng số tiền theo giá trị truyền vào
-            AudioManager.Instance.PlaySound(GameAudioClip.COLLECT);
             UpdateMoneyUI();
         }
     }

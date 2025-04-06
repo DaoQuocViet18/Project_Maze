@@ -32,6 +32,7 @@ public class LoseGameUI : MonoBehaviour
     private void OnLoseGame(IEventParam param)
     {
         Debug.Log("Game Over! LosePanel is now active.");
+        EventDispatcher.Dispatch(new EventDefine.OnAdsGame());
         AudioManager.Instance.PlaySound(GameAudioClip.GAMEOVER_SOUND);
 
         LosePanel.SetActive(true); // Hiển thị LosePanel

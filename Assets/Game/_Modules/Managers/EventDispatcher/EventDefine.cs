@@ -32,4 +32,5 @@ public partial class EventDefine : IEventParam
 
     public struct OnWinGame : IEventParam { }
     public struct OnLoseGame : IEventParam { }
+    public struct OnAdsGame : IEventParam { }
 }
