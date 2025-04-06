@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 public class InteractorCol2D : MonoBehaviour
 {

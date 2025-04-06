@@ -112,6 +112,14 @@ public class SwipeMovement : MonoBehaviour
         _playerAnimation.AnimaIdle();
     }
 
+    public Vector3 targetPosition;
+
+    // Vẽ Gizmos cho vùng kiểm tra va chạm
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere((transform.position + (Vector3)direction * 0.5f), 0.1f);
+    }
 
     private bool CheckCollision(Vector3 targetPosition)
     {

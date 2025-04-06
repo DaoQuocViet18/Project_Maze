@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using static InteractorCol2D;
 
-[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 public class InteractorTri2D : MonoBehaviour
 {
