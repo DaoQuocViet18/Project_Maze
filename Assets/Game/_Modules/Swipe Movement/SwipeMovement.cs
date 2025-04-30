@@ -106,6 +106,7 @@ public class SwipeMovement : MonoBehaviour
 
         // 🔹 Dừng khi va chạm
         _rb.linearVelocity = Vector2.zero;
+        transform.position -= (Vector3)direction.normalized * 0.05f;
 
         grounded = true;
         _playerAnimation.RotateOnCollision(direction);
@@ -120,5 +121,10 @@ public class SwipeMovement : MonoBehaviour
 
         // 🔥 Kiểm tra nếu collider tồn tại và không phải là Trigger
         return collider != null && !collider.isTrigger;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Đã va chạm với: " + collision.collider.name);
     }
 }
